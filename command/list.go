@@ -1,7 +1,10 @@
 package command
 
 import (
+	"fmt"
 	"strings"
+
+	"github.com/google/go-github/github"
 )
 
 type ListCommand struct {
@@ -10,12 +13,16 @@ type ListCommand struct {
 
 func (c *ListCommand) Run(args []string) int {
 	// Write your code here
+	client := github.NewClient(nil)
+	orgs, _, err := client.Organizations.List("tjinjin", nil)
+	fmt.Println(orgs)
+	fmt.Println(err)
 
 	return 0
 }
 
 func (c *ListCommand) Synopsis() string {
-	return ""
+	return "list"
 }
 
 func (c *ListCommand) Help() string {
