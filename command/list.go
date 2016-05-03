@@ -14,8 +14,13 @@ type ListCommand struct {
 func (c *ListCommand) Run(args []string) int {
 	// Write your code here
 	client := github.NewClient(nil)
-	orgs, _, err := client.Organizations.List("tjinjin", nil)
-	fmt.Println(orgs)
+
+	opt := &github.ListOptions{
+		Page: 2, PerPage: 2,
+	}
+
+	event, _, err := client.Activity.ListEventsPerformedByUser("tjinjin", true, opt)
+	fmt.Println(event)
 	fmt.Println(err)
 
 	return 0
